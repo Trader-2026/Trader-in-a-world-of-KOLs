@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$Trader · Community Bank & Story</title>
+<meta name="description" content="$Trader, Trader in a world of KOLs: the story, the community bank and every link to verify it yourself.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#11140F;font-family:Inter,system-ui,sans-serif;color:#ECEBDF;line-height:1.55}
+html[lang=hi] body{font-family:'Noto Sans Devanagari',Inter,system-ui,sans-serif;line-height:1.75}
+html[lang=zh] body{font-family:Inter,'PingFang SC','Microsoft YaHei','Noto Sans SC',system-ui,sans-serif}
+html[lang=zh] h2,html[lang=hi] h2,html[lang=zh] .ev .d,html[lang=hi] .ev .d,html[lang=zh] .quote,html[lang=hi] .quote{font-family:inherit;font-weight:700}
+html[lang=zh] .tag,html[lang=hi] .tag{letter-spacing:0}
+html[lang=ar] body{font-family:'Noto Sans Arabic',Inter,system-ui,sans-serif;line-height:1.75}
+a{color:#8FBF5A}a:hover{color:#A9D67A}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 20px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.nav{display:flex;gap:14px;flex-wrap:wrap;font-size:14px}
+.nav a{color:#B4B9A3;text-decoration:none}.nav a:hover{color:#8FBF5A}
+.lang{display:flex;flex-wrap:wrap;border:1px solid #343B2A;border-radius:8px;overflow:hidden}
+.lang button{min-height:38px;min-width:44px;padding:0 12px;background:transparent;color:#B4B9A3;border:0;font:700 14px Inter,sans-serif;cursor:pointer}
+.lang button.on{background:#8FBF5A;color:#11140F}
+.tag{display:inline-block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9FA88A;border:1px solid #343B2A;border-radius:20px;padding:4px 12px;margin-bottom:14px}
+html[lang=ar] .tag{letter-spacing:0}
+h1{font-family:'Black Ops One',Inter,sans-serif;font-weight:400;font-size:clamp(36px,7vw,64px);margin:0 0 8px;line-height:1.05}
+h1 span{color:#8FBF5A}
+h2{font-family:'Black Ops One',Inter,sans-serif;font-weight:400;font-size:28px;margin:52px 0 14px;scroll-margin-top:20px}
+html[lang=ar] h2,html[lang=ar] .ev .d,html[lang=ar] .quote{font-family:'Noto Sans Arabic',sans-serif;font-weight:700}
+.sub{color:#B4B9A3;margin:0 0 26px;font-size:17px;max-width:680px}
+.addr{background:#1B2017;border:1px solid #343B2A;border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.addr .lbl{color:#9FA88A;font-size:13px;font-weight:700;display:block;margin-bottom:6px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+code{font-family:ui-monospace,Menlo,monospace;word-break:break-all;unicode-bidi:isolate;direction:ltr}
+.addr code{font-size:14px;flex:1;min-width:200px}
+.pending{color:#C9A45A;font-style:italic;font-family:inherit}
+button.copy,.btn{min-height:44px;padding:0 18px;border:0;border-radius:8px;background:#8FBF5A;color:#11140F;font:700 15px Inter,sans-serif;cursor:pointer;display:inline-flex;align-items:center;text-decoration:none}
+html[lang=ar] button.copy,html[lang=ar] .btn{font-family:'Noto Sans Arabic',sans-serif}
+button.copy:disabled{background:#3E4A2C;color:#8A8F7C;cursor:not-allowed}
+.btn.ghost{background:transparent;border:1px solid #8FBF5A;color:#8FBF5A}
+h3.sec{margin-top:30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card{background:#161A12;border:1px solid #2C3323;border-radius:12px;padding:20px}
+.card .n{font-family:'Black Ops One',Inter,sans-serif;color:#8FBF5A;font-size:30px}
+.card h3{margin:6px 0 8px;font-size:18px}
+.card p{margin:0;color:#B4B9A3;font-size:15px}
+ol.steps{margin:0;padding-inline-start:22px}
+ol.steps li{margin-bottom:10px}
+.timeline{border-inline-start:2px solid #343B2A;margin-inline-start:8px;padding-inline-start:22px}
+.ev{position:relative;margin-bottom:26px}
+.ev:before{content:"";position:absolute;inset-inline-start:-30px;top:6px;width:14px;height:14px;border-radius:50%;background:#8FBF5A;border:3px solid #11140F}
+.ev .d{font-family:'Black Ops One',Inter,sans-serif;color:#8FBF5A;font-size:15px;letter-spacing:.05em}
+.ev h3{margin:2px 0 8px;font-size:19px}
+.ev p{margin:0 0 6px;color:#B4B9A3}
+.ev ul{margin:4px 0 0;padding-inline-start:20px;color:#B4B9A3}
+.ev ul li{margin-bottom:4px}
+.quote{font-family:'Black Ops One',Inter,sans-serif;font-size:22px;color:#ECEBDF!important;margin:10px 0 0}
+.box{overflow-x:auto;border:1px solid #2C3323;border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+th{background:#2B3A1F;text-align:start;padding:12px 14px}
+td{padding:12px 14px;border-top:1px solid #2C3323;vertical-align:top}
+td.empty{color:#8A8F7C;font-style:italic;text-align:center}
+.vlist{display:grid;gap:12px}
+.v{background:#161A12;border:1px solid #2C3323;border-radius:12px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.v .ic{font-size:26px;line-height:1}
+.v .tx{flex:1;min-width:220px}
+.v h3{margin:0 0 4px;font-size:17px}
+.v p{margin:0;color:#B4B9A3;font-size:14px}
+.warn{background:#2A2215;border:1px solid #5A4826;border-radius:12px;padding:16px 18px}
+.warn ul{margin:6px 0 0;padding-inline-start:20px}
+.foot{margin-top:40px;font-size:14px;color:#9FA88A;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;border-top:1px solid #2C3323;padding-top:20px}
+</style></head><body><div class="wrap">
+
+<div class="top">
+  <nav class="nav">
+    <a href="#story" data-i="nav_story"></a>
+    <a href="#bank" data-i="nav_bank"></a>
+    <a href="#verify" data-i="nav_verify"></a>
+  </nav>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="es">ES</button>
+    <button type="button" data-lang="fr">FR</button>
+    <button type="button" data-lang="ar">ع</button>
+    <button type="button" data-lang="zh">中文</button>
+    <button type="button" data-lang="hi">हिं</button>
+  </div>
+</div>
+
+<span class="tag" data-i="tag"></span>
+<h1 dir="ltr"><span>$TRADER</span><br>IN A WORLD OF KOLS</h1>
+<p class="sub" data-i="sub"></p>
+
+<div class="addr">
+  <span class="lbl" data-i="ca_lbl"></span>
+  <div class="row">
+    <code id="ca">7TnXXR1ytJ9PZDxgSA8VwbyKmEWZmiA2YAn55YyVpump</code>
+    <button type="button" class="copy" id="copyCA" data-i="copy"></button>
+  </div>
+</div>
+
+<h2 id="story" data-i="story_h"></h2>
+<div class="timeline">
+  <div class="ev">
+    <div class="d" data-i="d1_date"></div>
+    <h3 data-i="d1_h"></h3>
+    <p data-i="d1_p"></p>
+    <ul data-l="d1_l"></ul>
+  </div>
+  <div class="ev">
+    <div class="d" data-i="left_d"></div>
+    <h3 data-i="left_h"></h3>
+    <ul data-l="left_l"></ul>
+  </div>
+  <div class="ev">
+    <div class="d" data-i="take_d"></div>
+    <h3 data-i="take_h"></h3>
+    <p data-i="take_p"></p>
+    <ul data-l="take_l"></ul>
+  </div>
+  <div class="ev">
+    <div class="d" data-i="today_d"></div>
+    <h3 data-i="today_h"></h3>
+    <p data-i="today_p"></p>
+    <p class="quote" data-i="quote"></p>
+  </div>
+</div>
+
+<h2 id="bank" data-i="bank_h"></h2>
+<p class="sub" data-i="bank_sub"></p>
+
+<div class="addr">
+  <span class="lbl" data-i="wallet_lbl"></span>
+  <div class="row">
+    <code id="wallet" class="pending" data-i="wallet_pending"></code>
+    <button type="button" class="copy" id="copyW" data-i="copy" disabled></button>
+    <a class="btn ghost" id="scan" href="https://solscan.io" target="_blank" rel="noopener" style="display:none" data-i="scan"></a>
+  </div>
+</div>
+
+<h3 class="sec" data-i="money_h"></h3>
+<div class="grid">
+  <div class="card"><div class="n">01</div><h3 data-i="c1_h"></h3><p data-i="c1_p"></p></div>
+  <div class="card"><div class="n">02</div><h3 data-i="c2_h"></h3><p data-i="c2_p"></p></div>
+  <div class="card"><div class="n">03</div><h3 data-i="c3_h"></h3><p data-i="c3_p"></p></div>
+</div>
+
+<h3 class="sec" data-i="how_h"></h3>
+<ol class="steps" data-l="how_l"></ol>
+
+<h3 class="sec" data-i="ledger_h"></h3>
+<div class="box"><table>
+<thead><tr><th data-i="th_date"></th><th data-i="th_type"></th><th data-i="th_tofrom"></th><th data-i="th_amount"></th><th data-i="th_tx"></th></tr></thead>
+<tbody><tr><td colspan="5" class="empty" data-i="ledger_empty"></td></tr></tbody>
+</table></div>
+
+<h2 id="verify" data-i="verify_h"></h2>
+<p class="sub" data-i="verify_sub"></p>
+<div class="vlist">
+  <div class="v"><div class="ic">🛡️</div><div class="tx"><h3>RugCheck</h3><p data-i="v_rug"></p></div>
+    <a class="btn ghost" href="https://rugcheck.xyz/tokens/7TnXXR1ytJ9PZDxgSA8VwbyKmEWZmiA2YAn55YyVpump" target="_blank" rel="noopener" data-i="open"></a></div>
+  <div class="v"><div class="ic">📊</div><div class="tx"><h3>DexScreener</h3><p data-i="v_dex"></p></div>
+    <a class="btn ghost" href="https://dexscreener.com/solana/AAzZ8nV8k5Vs9pNRJoKF7y5jJtHhdEDNUHhx4jcRyXLL" target="_blank" rel="noopener" data-i="open"></a></div>
+  <div class="v"><div class="ic">💊</div><div class="tx"><h3>Pump.fun</h3><p data-i="v_pump"></p></div>
+    <a class="btn ghost" href="https://pump.fun/coin/7TnXXR1ytJ9PZDxgSA8VwbyKmEWZmiA2YAn55YyVpump" target="_blank" rel="noopener" data-i="open"></a></div>
+  <div class="v"><div class="ic">🧾</div><div class="tx"><h3>Solscan · Token</h3><p data-i="v_solt"></p></div>
+    <a class="btn ghost" href="https://solscan.io/token/7TnXXR1ytJ9PZDxgSA8VwbyKmEWZmiA2YAn55YyVpump" target="_blank" rel="noopener" data-i="open"></a></div>
+  <div class="v"><div class="ic">🏦</div><div class="tx"><h3>Solscan · Traders Bank</h3><p data-i="v_bank"></p></div>
+    <a class="btn ghost" href="https://solscan.io/account/5V9axtVv34idU3kYgigZzDUpDGMUcWjpRyNvgX29Nx8B" target="_blank" rel="noopener" data-i="open"></a></div>
+  <div class="v"><div class="ic">🪖</div><div class="tx"><h3 data-i="v_join_h"></h3><p data-i="v_join"></p></div>
+    <a class="btn" href="https://x.com/i/chat/group_join/g2122770946905755914/xbahRY0Ljf" target="_blank" rel="noopener" data-i="join"></a></div>
+</div>
+
+<h2 data-i="safe_h"></h2>
+<div class="warn"><strong data-i="safe_strong"></strong>
+<ul data-l="safe_l"></ul>
+<p style="margin:10px 0 0"><span data-i="copycat"></span> <code>7TnXXR1ytJ9PZDxgSA8VwbyKmEWZmiA2YAn55YyVpump</code></p>
+</div>
+
+<div class="foot"><span data-i="foot1"></span><span data-i="foot2"></span></div>
+</div>
+
+<script>
+var WALLET="5V9axtVv34idU3kYgigZzDUpDGMUcWjpRyNvgX29Nx8B";
+var MABS='<a href="https://x.com/Mabsvegas" target="_blank" rel="noopener" dir="ltr">@Mabsvegas</a>';
+var T={
+en:{nav_story:"Story",nav_bank:"Bank",nav_verify:"Verify",
+tag:"Day 6 · Community coin · 3 organic KOLs",
+sub:"The story of the $Trader dev, why this is now a COMMUNITY coin, and the war chest of the Traders' army. Everything here is verifiable on-chain. Don't trust us, verify. 👇",
+ca_lbl:"$Trader contract (CA)",copy:"Copy",copied:"Copied",
+story_h:"The story",
+d1_date:"DAY 1 · NOV 16",d1_h:"The dev launched, then left 🚪",
+d1_p:"The dev launched “Trader in a world of KOLs” on Pump.fun. Then he left.",
+d1_l:["✅ He sold all his coins: creator balance = 0 (RugCheck: “SOLD”)","✅ 60M tokens burned 🔥 Supply: 939.9M instead of 1B","✅ The first KOLs dumped too. The coin should have died."],
+left_d:"WHAT HE LEFT BEHIND",left_h:"A clean product 🎁",
+left_l:["🔒 Liquidity locked forever: no unlock date. LP tokens were burned at migration. The dev can never come back to take the liquidity. Nobody can.","🚫 Mint &amp; freeze disabled: no new coins, no frozen wallets","🔏 Metadata locked: name and logo can never change","🧾 Fees: 1.25% on buys, 1.25% on sells. 💰 0.30% is paid to holders in SOL, ⚙️ 0.95% goes to Pump.fun &amp; liquidity providers"],
+take_d:"THE TAKEOVER",take_h:"The community took over 🪖",take_p:"An army of ordinary traders picked it up:",
+take_l:["🐱 Helmets on, one number per soldier","⚔️ Daily raids on X","🫡 3 organic KOLs joined without asking for anything","🏦 A community bank, 100% public on-chain","👀 Even the wallet verified with @blknoiz06 bought on Day 1"],
+today_d:"TODAY",today_h:"No dev. No team. No VC.",today_p:"$Trader belongs to its community. 🌍 We're still looking for the dev, to thank him one day. 🙏",quote:"It's the people's cryptocurrency.",
+bank_h:"Community Bank",
+bank_sub:"The war chest of the Traders' army. Every SOL and every $Trader that comes in is used to grow the community: recruiting real traders, rewarding engaged KOLs and building the ecosystem around the coin. 100% public, 100% transparent.",
+wallet_lbl:"Official bank wallet (Solana)",wallet_pending:"Official address coming soon. Only trust the address published here and on @Mabsvegas.",scan:"View on Solscan",
+money_h:"Where the money goes",
+c1_h:"Recruit Traders",c1_p:"We offer $Trader coins to new soldiers who join, pick a helmet number and fight for the project on X.",
+c2_h:"Real KOLs &amp; marketing",c2_p:"We reward engaged KOLs who hold with us and spread the word. Organic KOLs for an organic project.",
+c3_h:"Ecosystem",c3_p:"We fund development of tools and products around the $Trader coin.",
+how_h:"How it works",
+how_l:["Anyone can send SOL or $Trader to the official bank wallet. No wallet connection is needed on this page.","SOL received is converted into $Trader to support the chart.","Every payment out of the bank (recruit, KOL, dev) is listed below with its on-chain transaction.","Anyone can check the wallet on Solscan at any time."],
+ledger_h:"Bank ledger",th_date:"Date",th_type:"Type",th_tofrom:"To / From",th_amount:"Amount",th_tx:"Transaction",ledger_empty:"First entries coming soon.",
+verify_h:"Verify everything yourself 🔎",verify_sub:"Every claim on this page can be checked in a few clicks. Here is where, and what to look for.",
+v_rug:"Security report: mint &amp; freeze disabled, metadata locked, liquidity locked with no unlock date, creator balance “SOLD”.",
+v_dex:"Live chart, liquidity, volume, and the Top Traders / Holders tabs to see who buys, sells and holds.",
+v_pump:"Holder count, top holders, creation date (Nov 16), dev holding 0%, and the holder rewards distribution.",
+v_solt:"Total supply (939.9M after the 60M burn) and the full on-chain history of the token.",
+v_bank:"Every SOL and $Trader that enters or leaves the community bank, in real time.",
+v_join_h:"Join the army",v_join:"The community group on X. Ask anything, check everything.",open:"Open",join:"Join",
+safe_h:"Stay safe",safe_strong:"The bank will never:",
+safe_l:["ask you to connect your wallet or sign anything,","DM you a different address to send funds to,","ask for your seed phrase or private key."],
+copycat:"⚠️ Copycat coins exist. The only real $Trader CA is:",
+foot1:"Stay connected and follow {MABS}. It's like following all the traders in the world 🌍",
+foot2:"Memecoin: no promise of profit. Contributions are voluntary donations. DYOR · NFA"},
+
+es:{nav_story:"Historia",nav_bank:"Banco",nav_verify:"Verificar",
+tag:"Day 6 · Coin comunitario · 3 KOLs orgánicos",
+sub:"La historia del dev de $Trader, por qué ahora es un coin COMUNITARIO, y el cofre de guerra del ejército de Traders. Todo aquí es verificable on-chain. No confíes en nosotros, verifica. 👇",
+ca_lbl:"Contrato de $Trader (CA)",copy:"Copiar",copied:"Copiado",
+story_h:"La historia",
+d1_date:"DAY 1 · 16 NOV",d1_h:"El dev lanzó y se fue 🚪",
+d1_p:"El dev lanzó «Trader in a world of KOLs» en Pump.fun. Luego se fue.",
+d1_l:["✅ Vendió todos sus coins: saldo del creador = 0 (RugCheck: «SOLD»)","✅ 60M de tokens quemados 🔥 Supply: 939,9M en lugar de 1.000M","✅ Los primeros KOLs también vendieron. El coin debería haber muerto."],
+left_d:"LO QUE DEJÓ",left_h:"Un producto limpio 🎁",
+left_l:["🔒 Liquidez bloqueada para siempre: sin fecha de desbloqueo. Los LP tokens se quemaron en la migración. El dev nunca podrá volver a llevarse la liquidez. Nadie podrá.","🚫 Mint y freeze desactivados: sin nuevos coins, sin wallets congeladas","🔏 Metadatos bloqueados: el nombre y el logo nunca podrán cambiar","🧾 Comisiones: 1,25% en compras, 1,25% en ventas. 💰 0,30% se paga a los holders en SOL, ⚙️ 0,95% va a Pump.fun y a los proveedores de liquidez"],
+take_d:"LA TOMA",take_h:"La comunidad tomó el control 🪖",take_p:"Un ejército de traders comunes lo recogió:",
+take_l:["🐱 Cascos puestos, un número por soldado","⚔️ Raids diarios en X","🫡 3 KOLs orgánicos se unieron sin pedir nada","🏦 Un banco comunitario, 100% público on-chain","👀 Incluso la wallet verificada con @blknoiz06 compró el Day 1"],
+today_d:"HOY",today_h:"Sin dev. Sin equipo. Sin VC.",today_p:"$Trader pertenece a su comunidad. 🌍 Seguimos buscando al dev, para agradecerle algún día. 🙏",quote:"Es la criptomoneda del pueblo.",
+bank_h:"Banco comunitario",
+bank_sub:"El cofre de guerra del ejército de Traders. Cada SOL y cada $Trader que entra se usa para hacer crecer la comunidad: reclutar traders reales, recompensar a los KOLs comprometidos y construir el ecosistema alrededor del coin. 100% público, 100% transparente.",
+wallet_lbl:"Wallet oficial del banco (Solana)",wallet_pending:"Dirección oficial muy pronto. Confía solo en la dirección publicada aquí y en @Mabsvegas.",scan:"Ver en Solscan",
+money_h:"A dónde va el dinero",
+c1_h:"Reclutar Traders",c1_p:"Ofrecemos coins $Trader a los nuevos soldados que se unen, eligen un número de casco y luchan por el proyecto en X.",
+c2_h:"KOLs reales y marketing",c2_p:"Recompensamos a los KOLs comprometidos que holdean con nosotros y corren la voz. KOLs orgánicos para un proyecto orgánico.",
+c3_h:"Ecosistema",c3_p:"Financiamos el desarrollo de herramientas y productos alrededor del coin $Trader.",
+how_h:"Cómo funciona",
+how_l:["Cualquiera puede enviar SOL o $Trader a la wallet oficial del banco. No hace falta conectar ninguna wallet en esta página.","Los SOL recibidos se convierten en $Trader para apoyar el chart.","Cada pago que sale del banco (recluta, KOL, dev) aparece abajo con su transacción on-chain.","Cualquiera puede revisar la wallet en Solscan en cualquier momento."],
+ledger_h:"Registro del banco",th_date:"Fecha",th_type:"Tipo",th_tofrom:"A / De",th_amount:"Monto",th_tx:"Transacción",ledger_empty:"Primeras entradas muy pronto.",
+verify_h:"Verifícalo todo tú mismo 🔎",verify_sub:"Cada dato de esta página se puede comprobar en pocos clics. Aquí tienes dónde, y qué mirar.",
+v_rug:"Informe de seguridad: mint y freeze desactivados, metadatos bloqueados, liquidez bloqueada sin fecha de desbloqueo, saldo del creador «SOLD».",
+v_dex:"Chart en vivo, liquidez, volumen, y las pestañas Top Traders / Holders para ver quién compra, vende y holdea.",
+v_pump:"Número de holders, top holders, fecha de creación (16 nov), dev al 0%, y la distribución de recompensas a los holders.",
+v_solt:"Supply total (939,9M tras la quema de 60M) y todo el historial on-chain del token.",
+v_bank:"Cada SOL y cada $Trader que entra o sale del banco comunitario, en tiempo real.",
+v_join_h:"Únete al ejército",v_join:"El grupo de la comunidad en X. Pregunta lo que quieras, verifícalo todo.",open:"Abrir",join:"Unirme",
+safe_h:"Mantente seguro",safe_strong:"El banco nunca te va a:",
+safe_l:["pedir que conectes tu wallet o que firmes algo,","enviar por DM otra dirección para mandar fondos,","pedir tu seed phrase o tu clave privada."],
+copycat:"⚠️ Existen coins falsos. El único CA real de $Trader es:",
+foot1:"Mantente conectado y sigue a {MABS}. Es como seguir a todos los traders del mundo 🌍",
+foot2:"Memecoin: sin promesa de ganancias. Las contribuciones son donaciones voluntarias. DYOR · NFA"},
+
+fr:{nav_story:"Histoire",nav_bank:"Banque",nav_verify:"Vérifier",
+tag:"Day 6 · Coin communautaire · 3 KOLs organiques",
+sub:"L'histoire du dev de $Trader, pourquoi c'est désormais un coin COMMUNAUTAIRE, et la caisse commune de l'armée des Traders. Tout ici est vérifiable on-chain. Ne nous croyez pas, vérifiez. 👇",
+ca_lbl:"Contrat $Trader (CA)",copy:"Copier",copied:"Copié",
+story_h:"L'histoire",
+d1_date:"DAY 1 · 16 NOV.",d1_h:"Le dev lance, puis il part 🚪",
+d1_p:"Le dev a lancé « Trader in a world of KOLs » sur Pump.fun. Puis il est parti.",
+d1_l:["✅ Il a vendu tous ses coins : solde du créateur = 0 (RugCheck : « SOLD »)","✅ 60 M de tokens brûlés 🔥 Supply : 939,9 M au lieu de 1 Md","✅ Les premiers KOLs ont vendu aussi. Le coin aurait dû mourir."],
+left_d:"CE QU'IL A LAISSÉ",left_h:"Un produit propre 🎁",
+left_l:["🔒 Liquidité verrouillée pour toujours : aucune date de déblocage. Les LP tokens ont été brûlés à la migration. Le dev ne pourra jamais revenir prendre la liquidité. Personne ne le pourra.","🚫 Mint et freeze désactivés : pas de nouveaux coins, pas de wallets gelés","🔏 Métadonnées verrouillées : le nom et le logo ne pourront jamais changer","🧾 Frais : 1,25 % à l'achat, 1,25 % à la vente. 💰 0,30 % reversé aux holders en SOL, ⚙️ 0,95 % pour Pump.fun et les fournisseurs de liquidité"],
+take_d:"LA REPRISE",take_h:"La communauté a pris le relais 🪖",take_p:"Une armée de traders ordinaires l'a repris :",
+take_l:["🐱 Casques sur la tête, un numéro par soldat","⚔️ Raids quotidiens sur X","🫡 3 KOLs organiques nous ont rejoints sans rien demander","🏦 Une caisse commune, 100 % publique on-chain","👀 Même le wallet vérifié avec @blknoiz06 a acheté au Day 1"],
+today_d:"AUJOURD'HUI",today_h:"Pas de dev. Pas d'équipe. Pas de VC.",today_p:"$Trader appartient à sa communauté. 🌍 On cherche toujours le dev, pour le remercier un jour. 🙏",quote:"C'est la crypto du peuple.",
+bank_h:"La banque communautaire",
+bank_sub:"La caisse commune de l'armée des Traders. Chaque SOL et chaque $Trader qui entre sert à faire grandir la communauté : recruter de vrais traders, récompenser les KOLs engagés et construire l'écosystème autour du coin. 100 % public, 100 % transparent.",
+wallet_lbl:"Wallet officiel de la banque (Solana)",wallet_pending:"Adresse officielle bientôt disponible. Ne faites confiance qu'à l'adresse publiée ici et sur @Mabsvegas.",scan:"Voir sur Solscan",
+money_h:"Où va l'argent",
+c1_h:"Recruter des Traders",c1_p:"On offre des $Trader aux nouveaux soldats qui rejoignent l'armée, choisissent un numéro de casque et se battent pour le projet sur X.",
+c2_h:"Vrais KOLs &amp; marketing",c2_p:"On récompense les KOLs engagés qui holdent avec nous et font passer le message. Des KOLs organiques pour un projet organique.",
+c3_h:"Écosystème",c3_p:"On finance le développement d'outils et de produits autour du coin $Trader.",
+how_h:"Comment ça marche",
+how_l:["Tout le monde peut envoyer des SOL ou des $Trader au wallet officiel de la banque. Aucune connexion de wallet n'est nécessaire sur cette page.","Les SOL reçus sont convertis en $Trader pour soutenir le chart.","Chaque paiement sortant de la banque (recrue, KOL, dev) est listé ci-dessous avec sa transaction on-chain.","Tout le monde peut vérifier le wallet sur Solscan à tout moment."],
+ledger_h:"Registre de la banque",th_date:"Date",th_type:"Type",th_tofrom:"À / De",th_amount:"Montant",th_tx:"Transaction",ledger_empty:"Premières entrées bientôt.",
+verify_h:"Vérifiez tout vous-mêmes 🔎",verify_sub:"Chaque affirmation de cette page se vérifie en quelques clics. Voici où, et quoi regarder.",
+v_rug:"Rapport de sécurité : mint et freeze désactivés, métadonnées verrouillées, liquidité verrouillée sans date de déblocage, solde du créateur « SOLD ».",
+v_dex:"Chart en direct, liquidité, volume, et les onglets Top Traders / Holders pour voir qui achète, vend et hold.",
+v_pump:"Nombre de holders, top holders, date de création (16 nov.), dev à 0 %, et la distribution des rewards aux holders.",
+v_solt:"Supply totale (939,9 M après le burn de 60 M) et tout l'historique on-chain du token.",
+v_bank:"Chaque SOL et chaque $Trader qui entre ou sort de la banque communautaire, en temps réel.",
+v_join_h:"Rejoins l'armée",v_join:"Le groupe de la communauté sur X. Posez vos questions, vérifiez tout.",open:"Ouvrir",join:"Rejoindre",
+safe_h:"Restez prudents",safe_strong:"La banque ne vous demandera jamais :",
+safe_l:["de connecter votre wallet ou de signer quoi que ce soit,","d'envoyer des fonds à une autre adresse reçue en DM,","votre seed phrase ou votre clé privée."],
+copycat:"⚠️ Des faux coins existent. Le seul vrai CA de $Trader est :",
+foot1:"Restez connectés et suivez {MABS}. C'est comme suivre tous les traders du monde 🌍",
+foot2:"Memecoin : aucune promesse de profit. Les contributions sont des dons volontaires. DYOR · NFA"},
+
+ar:{nav_story:"القصة",nav_bank:"البنك",nav_verify:"تحقّق",
+tag:"اليوم 6 · عملة مجتمعية · 3 KOLs حقيقيين",
+sub:"قصة مطوّر ‎$Trader‎، ولماذا أصبحت الآن عملة مجتمعية، وصندوق حرب جيش المتداولين. كل ما هنا يمكن التحقق منه على البلوكتشين. لا تثق بنا، تحقّق بنفسك. 👇",
+ca_lbl:"عقد ‎$Trader‎ (CA)",copy:"نسخ",copied:"تم النسخ",
+story_h:"القصة",
+d1_date:"اليوم 1 · 16 نوفمبر",d1_h:"المطوّر أطلق العملة ثم غادر 🚪",
+d1_p:"أطلق المطوّر «Trader in a world of KOLs» على Pump.fun. ثم غادر.",
+d1_l:["✅ باع كل عملاته: رصيد المنشئ = 0 (RugCheck: «SOLD»)","✅ تم حرق 60 مليون توكن 🔥 المعروض: 939.9 مليون بدلاً من مليار","✅ أول المؤثرين (KOLs) باعوا أيضاً. كان من المفترض أن تموت العملة."],
+left_d:"ما تركه خلفه",left_h:"منتج نظيف 🎁",
+left_l:["🔒 السيولة مقفلة إلى الأبد: لا يوجد تاريخ فتح. تم حرق توكنات LP عند الانتقال. لن يستطيع المطوّر العودة لأخذ السيولة أبداً، ولا أي أحد آخر.","🚫 خاصيتا Mint وFreeze معطّلتان: لا عملات جديدة، ولا محافظ مجمّدة","🔏 البيانات الوصفية مقفلة: الاسم والشعار لا يمكن تغييرهما أبداً","🧾 الرسوم: 1.25% عند الشراء، 1.25% عند البيع. 💰 0.30% تُدفع للحاملين بعملة SOL، ⚙️ 0.95% لـ Pump.fun ومزوّدي السيولة"],
+take_d:"الاستلام",take_h:"المجتمع تولّى القيادة 🪖",take_p:"جيش من المتداولين العاديين حمل الراية:",
+take_l:["🐱 الخوذات على الرؤوس، رقم لكل جندي","⚔️ غارات يومية على X","🫡 انضم 3 مؤثرين حقيقيين دون أن يطلبوا أي شيء","🏦 بنك مجتمعي، علني 100% على البلوكتشين","👀 حتى المحفظة الموثّقة مع ‎@blknoiz06‎ اشترت في اليوم الأول"],
+today_d:"اليوم",today_h:"لا مطوّر. لا فريق. لا مستثمرين (VC).",today_p:"‎$Trader‎ ملك لمجتمعه. 🌍 ما زلنا نبحث عن المطوّر لنشكره يوماً ما. 🙏",quote:"إنها عملة الشعب.",
+bank_h:"البنك المجتمعي",
+bank_sub:"صندوق حرب جيش المتداولين. كل SOL وكل ‎$Trader‎ يدخل يُستخدم لتنمية المجتمع: تجنيد متداولين حقيقيين، ومكافأة المؤثرين الملتزمين، وبناء المنظومة حول العملة. علني 100%، شفاف 100%.",
+wallet_lbl:"المحفظة الرسمية للبنك (Solana)",wallet_pending:"العنوان الرسمي قريباً. لا تثق إلا بالعنوان المنشور هنا وعلى ‎@Mabsvegas‎.",scan:"عرض على Solscan",
+money_h:"أين تذهب الأموال",
+c1_h:"تجنيد المتداولين",c1_p:"نقدّم عملات ‎$Trader‎ للجنود الجدد الذين ينضمون، ويختارون رقم خوذة، ويقاتلون من أجل المشروع على X.",
+c2_h:"مؤثرون حقيقيون وتسويق",c2_p:"نكافئ المؤثرين الملتزمين الذين يحتفظون معنا وينشرون الكلمة. مؤثرون حقيقيون لمشروع حقيقي.",
+c3_h:"المنظومة",c3_p:"نموّل تطوير أدوات ومنتجات حول عملة ‎$Trader‎.",
+how_h:"كيف يعمل",
+how_l:["يمكن لأي شخص إرسال SOL أو ‎$Trader‎ إلى محفظة البنك الرسمية. لا حاجة لربط أي محفظة في هذه الصفحة.","يتم تحويل SOL المستلمة إلى ‎$Trader‎ لدعم الرسم البياني.","كل دفعة تخرج من البنك (مجنّد، مؤثر، مطوّر) مدرجة أدناه مع معاملتها على البلوكتشين.","يمكن لأي شخص التحقق من المحفظة على Solscan في أي وقت."],
+ledger_h:"سجل البنك",th_date:"التاريخ",th_type:"النوع",th_tofrom:"إلى / من",th_amount:"المبلغ",th_tx:"المعاملة",ledger_empty:"أولى العمليات قريباً.",
+verify_h:"تحقّق من كل شيء بنفسك 🔎",verify_sub:"كل معلومة في هذه الصفحة يمكن التحقق منها ببضع نقرات. إليك أين، وما الذي يجب النظر إليه.",
+v_rug:"تقرير الأمان: Mint وFreeze معطّلتان، البيانات الوصفية مقفلة، السيولة مقفلة دون تاريخ فتح، رصيد المنشئ «SOLD».",
+v_dex:"الرسم البياني المباشر، السيولة، حجم التداول، وتبويبا Top Traders / Holders لمعرفة من يشتري ومن يبيع ومن يحتفظ.",
+v_pump:"عدد الحاملين، أكبر الحاملين، تاريخ الإنشاء (16 نوفمبر)، حصة المطوّر 0%، وتوزيع المكافآت على الحاملين.",
+v_solt:"إجمالي المعروض (939.9 مليون بعد حرق 60 مليون) والتاريخ الكامل للتوكن على البلوكتشين.",
+v_bank:"كل SOL وكل ‎$Trader‎ يدخل أو يخرج من البنك المجتمعي، في الوقت الفعلي.",
+v_join_h:"انضم إلى الجيش",v_join:"مجموعة المجتمع على X. اسأل عن أي شيء، وتحقّق من كل شيء.",open:"فتح",join:"انضمام",
+safe_h:"ابقَ آمناً",safe_strong:"البنك لن يطلب منك أبداً:",
+safe_l:["ربط محفظتك أو توقيع أي شيء،","إرسال أموال إلى عنوان مختلف يصلك في رسالة خاصة،","عبارة الاسترداد (seed phrase) أو مفتاحك الخاص."],
+copycat:"⚠️ توجد عملات مقلّدة. عنوان العقد الحقيقي الوحيد لـ ‎$Trader‎ هو:",
+foot1:"ابقَ على اتصال وتابع {MABS}. كأنك تتابع كل متداولي العالم 🌍",
+foot2:"عملة ميم: لا وعد بأي ربح. المساهمات تبرعات طوعية. DYOR · NFA"},
+zh:{nav_story:"故事",nav_bank:"银行",nav_verify:"验证",
+tag:"DAY 6 · 社区币 · 3 位自然 KOL",
+sub:"$Trader 开发者的故事，为什么它现在是一个社区币，以及 Traders 军团的战备金库。这里的一切都可以链上验证。别相信我们，自己验证。👇",
+ca_lbl:"$Trader 合约地址 (CA)",copy:"复制",copied:"已复制",
+story_h:"故事",
+d1_date:"DAY 1 · 11月16日",d1_h:"开发者发币后离开了 🚪",
+d1_p:"开发者在 Pump.fun 上发布了 “Trader in a world of KOLs”，然后就离开了。",
+d1_l:["✅ 他卖掉了所有代币：创建者余额 = 0（RugCheck：“SOLD”）","✅ 销毁了 6000 万枚代币 🔥 总供应量：9.399 亿，而不是 10 亿","✅ 第一批 KOL 也砸盘了。这个币本该死掉。"],
+left_d:"他留下了什么",left_h:"一个干净的产品 🎁",
+left_l:["🔒 流动性永久锁定：没有解锁日期。LP 代币在迁移时已被销毁。开发者永远无法回来拿走流动性，任何人都不能。","🚫 增发和冻结权限已关闭：不会有新币，钱包不会被冻结","🔏 元数据已锁定：名称和 logo 永远不能更改","🧾 手续费：买入 1.25%，卖出 1.25%。💰 0.30% 以 SOL 分给持有者，⚙️ 0.95% 归 Pump.fun 和流动性提供者"],
+take_d:"接管",take_h:"社区接管了 🪖",take_p:"一支由普通交易者组成的军队接过了它：",
+take_l:["🐱 戴上头盔，每位士兵一个编号","⚔️ 每天在 X 上发起 raid","🫡 3 位自然 KOL 主动加入，不求回报","🏦 社区银行，100% 链上公开","👀 甚至与 @blknoiz06 认证关联的钱包也在第 1 天买入了"],
+today_d:"今天",today_h:"没有开发者。没有团队。没有 VC。",today_p:"$Trader 属于它的社区。🌍 我们仍在寻找那位开发者，希望有一天能感谢他。🙏",quote:"这是人民的加密货币。",
+bank_h:"社区银行",
+bank_sub:"Traders 军团的战备金库。每一枚流入的 SOL 和 $Trader 都用于壮大社区：招募真正的交易者、奖励投入的 KOL、围绕这个币建设生态。100% 公开，100% 透明。",
+wallet_lbl:"银行官方钱包（Solana）",wallet_pending:"官方地址即将公布。只信任此处和 @Mabsvegas 发布的地址。",scan:"在 Solscan 查看",
+money_h:"资金去向",
+c1_h:"招募交易者",c1_p:"我们向新加入、选择头盔编号并在 X 上为项目而战的士兵赠送 $Trader。",
+c2_h:"真正的 KOL 和营销",c2_p:"我们奖励和我们一起持有并积极宣传的 KOL。自然的 KOL，服务自然的项目。",
+c3_h:"生态",c3_p:"我们资助围绕 $Trader 的工具和产品开发。",
+how_h:"运作方式",
+how_l:["任何人都可以向银行官方钱包发送 SOL 或 $Trader。本页面无需连接钱包。","收到的 SOL 会兑换成 $Trader，以支撑走势。","银行的每一笔支出（招募、KOL、开发）都会在下方列出，并附上链上交易。","任何人都可以随时在 Solscan 上查看该钱包。"],
+ledger_h:"银行账本",th_date:"日期",th_type:"类型",th_tofrom:"收款方 / 付款方",th_amount:"金额",th_tx:"交易",ledger_empty:"首批记录即将公布。",
+verify_h:"一切都自己验证 🔎",verify_sub:"本页面的每一项说法都能在几次点击内核实。以下是去哪里查、看什么。",
+v_rug:"安全报告：增发和冻结已关闭、元数据已锁定、流动性锁定且无解锁日期、创建者余额显示 “SOLD”。",
+v_dex:"实时走势、流动性、交易量，以及 Top Traders / Holders 标签，查看谁在买、谁在卖、谁在持有。",
+v_pump:"持有人数、前排持有者、创建日期（11月16日）、开发者持仓 0%，以及持有者奖励分配。",
+v_solt:"总供应量（销毁 6000 万后为 9.399 亿）以及代币完整的链上历史。",
+v_bank:"社区银行每一笔 SOL 和 $Trader 的流入流出，实时可查。",
+v_join_h:"加入军团",v_join:"X 上的社区群组。有问必答，一切可查。",open:"打开",join:"加入",
+safe_h:"注意安全",safe_strong:"银行永远不会：",
+safe_l:["要求你连接钱包或签署任何东西，","私信给你另一个转账地址，","索要你的助记词或私钥。"],
+copycat:"⚠️ 存在仿冒币。$Trader 唯一真实的 CA 是：",
+foot1:"保持关注 {MABS}。就像关注全世界所有的交易者 🌍",
+foot2:"Memecoin：不承诺任何收益。所有捐助均为自愿捐赠。DYOR · NFA"},
+
+hi:{nav_story:"कहानी",nav_bank:"बैंक",nav_verify:"जाँचें",
+tag:"Day 6 · कम्युनिटी कॉइन · 3 ऑर्गेनिक KOLs",
+sub:"$Trader के डेव की कहानी, यह अब एक कम्युनिटी कॉइन क्यों है, और Traders की सेना का वॉर चेस्ट। यहाँ सब कुछ ऑन-चेन वेरिफ़ाई किया जा सकता है। हम पर भरोसा मत करो, खुद जाँचो। 👇",
+ca_lbl:"$Trader कॉन्ट्रैक्ट (CA)",copy:"कॉपी करें",copied:"कॉपी हो गया",
+story_h:"कहानी",
+d1_date:"DAY 1 · 16 नवंबर",d1_h:"डेव ने लॉन्च किया, फिर चला गया 🚪",
+d1_p:"डेव ने Pump.fun पर “Trader in a world of KOLs” लॉन्च किया। फिर वह चला गया।",
+d1_l:["✅ उसने अपने सारे कॉइन बेच दिए: क्रिएटर बैलेंस = 0 (RugCheck: “SOLD”)","✅ 60M टोकन बर्न किए गए 🔥 सप्लाई: 1B की जगह 939.9M","✅ पहले KOLs ने भी बेच दिया। कॉइन को मर जाना चाहिए था।"],
+left_d:"वह क्या छोड़ गया",left_h:"एक साफ़-सुथरा प्रोडक्ट 🎁",
+left_l:["🔒 लिक्विडिटी हमेशा के लिए लॉक: कोई अनलॉक तारीख नहीं। माइग्रेशन के समय LP टोकन बर्न कर दिए गए। डेव कभी वापस आकर लिक्विडिटी नहीं ले सकता। कोई नहीं ले सकता।","🚫 Mint और freeze बंद: कोई नया कॉइन नहीं, कोई वॉलेट फ़्रीज़ नहीं","🔏 मेटाडेटा लॉक: नाम और लोगो कभी नहीं बदल सकते","🧾 फ़ीस: खरीद पर 1.25%, बिक्री पर 1.25%। 💰 0.30% होल्डर्स को SOL में मिलता है, ⚙️ 0.95% Pump.fun और लिक्विडिटी प्रोवाइडर्स को जाता है"],
+take_d:"टेकओवर",take_h:"कम्युनिटी ने कमान संभाली 🪖",take_p:"आम ट्रेडर्स की एक सेना ने इसे उठाया:",
+take_l:["🐱 हेलमेट पहने, हर सैनिक का एक नंबर","⚔️ X पर रोज़ रेड","🫡 3 ऑर्गेनिक KOLs बिना कुछ माँगे जुड़े","🏦 एक कम्युनिटी बैंक, 100% ऑन-चेन पब्लिक","👀 यहाँ तक कि @blknoiz06 से वेरिफ़ाइड वॉलेट ने भी Day 1 पर खरीदा"],
+today_d:"आज",today_h:"कोई डेव नहीं। कोई टीम नहीं। कोई VC नहीं।",today_p:"$Trader अपनी कम्युनिटी का है। 🌍 हम अब भी डेव को ढूँढ रहे हैं, ताकि एक दिन उसका शुक्रिया कर सकें। 🙏",quote:"यह जनता की क्रिप्टोकरेंसी है।",
+bank_h:"कम्युनिटी बैंक",
+bank_sub:"Traders की सेना का वॉर चेस्ट। आने वाला हर SOL और हर $Trader कम्युनिटी को बढ़ाने में लगता है: असली ट्रेडर्स की भर्ती, जुड़े हुए KOLs को इनाम, और कॉइन के आसपास इकोसिस्टम बनाना। 100% पब्लिक, 100% पारदर्शी।",
+wallet_lbl:"बैंक का आधिकारिक वॉलेट (Solana)",wallet_pending:"आधिकारिक पता जल्द आएगा। सिर्फ़ यहाँ और @Mabsvegas पर पब्लिश किए गए पते पर भरोसा करें।",scan:"Solscan पर देखें",
+money_h:"पैसा कहाँ जाता है",
+c1_h:"ट्रेडर्स की भर्ती",c1_p:"हम उन नए सैनिकों को $Trader कॉइन देते हैं जो जुड़ते हैं, हेलमेट नंबर चुनते हैं और X पर प्रोजेक्ट के लिए लड़ते हैं।",
+c2_h:"असली KOLs और मार्केटिंग",c2_p:"हम उन KOLs को इनाम देते हैं जो हमारे साथ होल्ड करते हैं और बात फैलाते हैं। ऑर्गेनिक प्रोजेक्ट के लिए ऑर्गेनिक KOLs।",
+c3_h:"इकोसिस्टम",c3_p:"हम $Trader कॉइन के आसपास टूल्स और प्रोडक्ट्स के डेवलपमेंट को फ़ंड करते हैं।",
+how_h:"यह कैसे काम करता है",
+how_l:["कोई भी बैंक के आधिकारिक वॉलेट में SOL या $Trader भेज सकता है। इस पेज पर वॉलेट कनेक्ट करने की ज़रूरत नहीं है।","मिले हुए SOL को चार्ट को सपोर्ट करने के लिए $Trader में बदला जाता है।","बैंक से होने वाला हर भुगतान (भर्ती, KOL, डेव) नीचे उसके ऑन-चेन ट्रांज़ैक्शन के साथ लिस्ट होता है।","कोई भी कभी भी Solscan पर वॉलेट चेक कर सकता है।"],
+ledger_h:"बैंक लेजर",th_date:"तारीख",th_type:"प्रकार",th_tofrom:"किसे / किससे",th_amount:"राशि",th_tx:"ट्रांज़ैक्शन",ledger_empty:"पहली एंट्री जल्द आएँगी।",
+verify_h:"सब कुछ खुद जाँचें 🔎",verify_sub:"इस पेज का हर दावा कुछ क्लिक में चेक किया जा सकता है। कहाँ देखना है और क्या देखना है, यहाँ है।",
+v_rug:"सिक्योरिटी रिपोर्ट: mint और freeze बंद, मेटाडेटा लॉक, बिना अनलॉक तारीख के लिक्विडिटी लॉक, क्रिएटर बैलेंस “SOLD”।",
+v_dex:"लाइव चार्ट, लिक्विडिटी, वॉल्यूम, और Top Traders / Holders टैब, यह देखने के लिए कि कौन खरीद रहा है, बेच रहा है और होल्ड कर रहा है।",
+v_pump:"होल्डर्स की संख्या, टॉप होल्डर्स, बनने की तारीख (16 नवंबर), डेव के पास 0%, और होल्डर रिवॉर्ड्स का वितरण।",
+v_solt:"कुल सप्लाई (60M बर्न के बाद 939.9M) और टोकन का पूरा ऑन-चेन इतिहास।",
+v_bank:"कम्युनिटी बैंक में आने-जाने वाला हर SOL और $Trader, रियल टाइम में।",
+v_join_h:"सेना में शामिल हों",v_join:"X पर कम्युनिटी ग्रुप। कुछ भी पूछें, सब कुछ चेक करें।",open:"खोलें",join:"शामिल हों",
+safe_h:"सुरक्षित रहें",safe_strong:"बैंक कभी भी:",
+safe_l:["आपसे वॉलेट कनेक्ट करने या कुछ भी साइन करने को नहीं कहेगा,","DM में फ़ंड भेजने के लिए कोई दूसरा पता नहीं भेजेगा,","आपका seed phrase या प्राइवेट की नहीं माँगेगा।"],
+copycat:"⚠️ नकली कॉइन मौजूद हैं। $Trader का एकमात्र असली CA है:",
+foot1:"जुड़े रहें और {MABS} को फ़ॉलो करें। यह दुनिया के सभी ट्रेडर्स को फ़ॉलो करने जैसा है 🌍",
+foot2:"Memecoin: मुनाफ़े का कोई वादा नहीं। योगदान स्वैच्छिक दान हैं। DYOR · NFA"}
+};
+var cur="en";
+function setLang(l){if(!T[l])l="en";cur=l;var d=T[l];
+  document.documentElement.lang=l;document.documentElement.dir=(l==="ar")?"rtl":"ltr";
+  document.querySelectorAll("[data-i]").forEach(function(e){var k=e.getAttribute("data-i");
+    if(e.id==="wallet"&&WALLET)return;
+    if(d[k]!==undefined)e.innerHTML=d[k].replace("{MABS}",MABS);});
+  document.querySelectorAll("[data-l]").forEach(function(e){var a=d[e.getAttribute("data-l")]||[];
+    e.innerHTML=a.map(function(x){return"<li>"+x+"</li>"}).join("");});
+  document.querySelectorAll(".lang button").forEach(function(b){b.className=b.getAttribute("data-lang")===l?"on":""});
+  try{localStorage.setItem("trader-lang",l)}catch(e){}}
+document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){setLang(b.getAttribute("data-lang"))}});
+function copy(t,b){try{navigator.clipboard.writeText(t).then(function(){b.textContent=T[cur].copied;setTimeout(function(){b.textContent=T[cur].copy},1500)}).catch(function(){})}catch(e){}}
+document.getElementById("copyCA").onclick=function(){copy(document.getElementById("ca").textContent,this)};
+if(WALLET){var w=document.getElementById("wallet");w.textContent=WALLET;w.className="";var b=document.getElementById("copyW");b.disabled=false;b.onclick=function(){copy(WALLET,this)};var sc=document.getElementById("scan");sc.href="https://solscan.io/account/"+WALLET;sc.style.display="inline-flex";}
+setLang("en");
+</script>
+</body></html>
