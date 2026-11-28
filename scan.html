@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trader Scan — Solana anti-rug</title>
+<meta name="description" content="Free Solana token scanner by the $Trader community. Paste a contract address, get a score out of 10 with red and green flags.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: field radio report — terse, military, trustworthy
+   IDEA: a soldier's inspection sheet stamped over a token
+   PICTURE: big score dial + seven inspection rows
+   COLOUR/TYPE: $Trader palette — deep 11140F, green 8FBF5A, bone EAE6D3; Space Grotesk + Inter
+   LAYOUT: one column, input on top, verdict, then sections */
+:root{--bg:#11140F;--panel:#1A1F17;--line:#2C3527;--ink:#EAE6D3;--mute:#A8A593;--green:#8FBF5A;--amber:#E2B54A;--red:#E0634F}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+a{color:var(--green)}
+.wrap{max-width:860px;margin:0 auto;padding:clamp(20px,4vw,48px) max(4vw,16px)}
+h1,h2,.num{font-family:"Space Grotesk",Inter,sans-serif}
+h1{font-size:clamp(32px,6vw,48px);line-height:1.05;margin:0 0 8px}
+h1 span{color:var(--green)}
+.sub{color:var(--mute);margin:0 0 24px}
+form{display:flex;gap:10px;flex-wrap:wrap}
+input{flex:1 1 320px;font:16px Inter,sans-serif;padding:14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+input:focus,button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+button{font:600 16px Inter,sans-serif;min-height:48px;padding:0 20px;border-radius:10px;border:0;background:var(--green);color:#11140F;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button:disabled{opacity:.5;cursor:wait}
+.status{margin:16px 0;color:var(--mute);min-height:1.5em}
+.verdict{display:grid;grid-template-columns:180px minmax(0,1fr);gap:24px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;margin:8px 0 20px}
+.dial{position:relative;width:180px;height:180px}
+.dial svg{width:100%;height:100%;transform:rotate(-90deg)}
+.dial .num{position:absolute;inset:0;display:grid;place-items:center;font-size:52px;font-weight:700}
+.dial .num small{font-size:18px;color:var(--mute)}
+.token{font-size:24px;font-weight:700;margin:0}
+.mute{color:var(--mute)}
+.tag{display:inline-block;padding:4px 10px;border-radius:99px;font-weight:600;font-size:14px;margin:8px 0}
+.flags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.flags span{font-size:13px;padding:3px 8px;border-radius:6px;background:#0c0e0a;border:1px solid var(--line)}
+.sec{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:var(--panel)}
+.sec summary{display:flex;justify-content:space-between;gap:12px;padding:14px 16px;cursor:pointer;font-weight:600;list-style:none}
+.sec summary::-webkit-details-marker{display:none}
+.bar{height:6px;background:#0c0e0a;border-radius:3px;margin:0 16px 4px;overflow:hidden}
+.bar i{display:block;height:100%}
+.sec ul{margin:8px 0 14px;padding:0 16px 0 36px}
+.sec li{margin:4px 0;overflow-wrap:anywhere}
+.share{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+footer{color:var(--mute);font-size:14px;border-top:1px solid var(--line);margin-top:32px;padding-top:16px}
+code{overflow-wrap:anywhere;font-size:13px}
+@media(max-width:600px){.verdict{grid-template-columns:1fr;justify-items:center;text-align:center}.flags{justify-content:center}}
+@media(prefers-reduced-motion:no-preference){.dial circle.v{transition:stroke-dashoffset .9s ease}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Trader <span>Scan</span></h1>
+  <p class="sub">Free Solana anti-rug scanner by the $Trader community. Paste a contract address (CA) and get a score out of 10.</p>
+  <form id="f">
+    <input id="ca" placeholder="Paste a Solana token CA" autocomplete="off" spellcheck="false" aria-label="Token contract address">
+    <button id="go" type="submit">Scan</button>
+  </form>
+  <div class="status" id="st" role="status"></div>
+  <div id="out"></div>
+  <footer>
+    Data: RugCheck, DexScreener, GeckoTerminal, read live from your browser. Nothing is stored. An automatic score can miss things: always check yourself.<br>
+    Built by the Trader in a world of KOLs community · <a href="https://trader-2026.github.io/Trader-in-a-world-of-KOLs/">Website</a> · <a href="https://x.com/traderinaworld">@traderinaworld</a><br>
+    <strong>DYOR · NFA</strong>
+  </footer>
+</div>
+<script>
+{
+const $=s=>document.querySelector(s);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const usd=n=>n==null||isNaN(n)?'n/a':'$'+(n>=1e6?(n/1e6).toFixed(2)+'M':n>=1e3?(n/1e3).toFixed(1)+'K':(+n).toFixed(n<1?6:0));
+const pct=n=>n==null||isNaN(n)?'n/a':(+n).toFixed(1)+'%';
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+const short=a=>a?a.slice(0,4)+'…'+a.slice(-4):'';
+async function get(url){const r=await fetch(url,{headers:{accept:'application/json'}});if(!r.ok)throw new Error(r.status);return r.json();}
+
+function botSignals(trades){
+  const sig=[];if(!trades||!trades.length)return sig;
+  const t=trades.map(x=>x.attributes).filter(Boolean);
+  const by={};t.forEach(a=>{(by[a.tx_from_address]=by[a.tx_from_address]||[]).push(a)});
+  let resale=0,fixed=0;
+  for(const w in by){const l=by[w];
+    const buys=l.filter(a=>a.kind==='buy').map(a=>a.to_token_amount),sells=l.filter(a=>a.kind==='sell').map(a=>a.from_token_amount);
+    if(buys.some(b=>sells.includes(b)))resale++;
+    const cnt={};l.forEach(a=>{const k=a.kind+(a.kind==='buy'?a.from_token_amount:a.from_token_amount);cnt[k]=(cnt[k]||0)+1});
+    if(Object.values(cnt).some(c=>c>=3))fixed++;}
+  if(resale)sig.push(resale+' wallet(s) resold the exact amount they bought');
+  if(fixed)sig.push(fixed+' wallet(s) trading the same size 3+ times');
+  const sol={};t.filter(a=>a.kind==='buy').forEach(a=>{(sol[a.from_token_amount]=sol[a.from_token_amount]||new Set()).add(a.tx_from_address)});
+  const same=Object.values(sol).filter(s=>s.size>1).length;
+  if(same)sig.push(same+' identical buy amount(s) from different wallets');
+  const blk={};t.forEach(a=>{(blk[a.block_number]=blk[a.block_number]||new Set()).add(a.tx_from_address)});
+  const multi=Object.values(blk).filter(s=>s.size>1).length;
+  if(multi)sig.push(multi+' block(s) with several wallets trading together');
+  return sig;
+}
+
+function analyze(rc,pair,orders,trades){
+  const S=[],red=[],green=[];
+  const add=(name,score,items)=>S.push({name,score:score==null?null:clamp(Math.round(score*10)/10,0,10),items});
+  // 1 contract
+  if(rc){const mint=rc.mintAuthority??rc.token?.mintAuthority,frz=rc.freezeAuthority??rc.token?.freezeAuthority,fee=rc.transferFee?.pct||0,mut=rc.tokenMeta?.mutable;
+    let s=0;const it=[];
+    mint?(red.push('Mint authority active'),it.push('🔴 Mint authority ACTIVE: new coins can be created')):(s+=3,it.push('🟢 Mint authority revoked'));
+    frz?(red.push('Freeze authority active'),it.push('🔴 Freeze authority ACTIVE: wallets can be frozen')):(s+=3,it.push('🟢 Freeze authority revoked'));
+    fee>0?(red.push('Transfer tax '+fee+'%'),it.push('🔴 Transfer tax: '+fee+'%')):(s+=2,it.push('🟢 No transfer tax'));
+    mut?it.push('🟡 Metadata can still be changed'):(s+=2,it.push('🟢 Metadata locked'));
+    if(!mint&&!frz)green.push('Clean contract');
+    add('1. Contract security',s,it);}else add('1. Contract security',null,['⚪ RugCheck unavailable']);
+  // 2 liquidity
+  const liq=pair?.liquidity?.usd;let lock=null;
+  if(rc?.markets?.length){const m=[...rc.markets].sort((a,b)=>((b.lp?.quoteUSD||0)+(b.lp?.baseUSD||0))-((a.lp?.quoteUSD||0)+(a.lp?.baseUSD||0)))[0];lock=m.lp?.lpLockedPct;}
+  {const it=[];let s=0;
+    if(lock!=null){s+=lock/20;it.push((lock>=95?'🟢':lock>=50?'🟡':'🔴')+' LP locked or burned: '+pct(lock)+' (main pool)');lock>=95?green.push('LP locked'):lock<50&&red.push('LP not locked');}else it.push('⚪ LP lock unknown');
+    if(liq!=null){s+=liq<1e3?0:liq<5e3?1:liq<1e4?2:liq<2.5e4?3:liq<1e5?4:5;it.push((liq<1e4?'🔴':liq<5e4?'🟡':'🟢')+' Liquidity: '+usd(liq));liq<1e4&&red.push('Low liquidity '+usd(liq));}else it.push('⚪ Liquidity unknown');
+    if(rc?.lockers&&Object.keys(rc.lockers).length)it.push('ℹ️ Lockers found: check unlock dates on RugCheck');
+    add('2. Liquidity',lock==null&&liq==null?null:s,it);}
+  // 3 holders
+  if(rc){const pools=new Set((rc.markets||[]).map(m=>m.pubkey));const ka=rc.knownAccounts||{};
+    const hs=(rc.topHolders||[]).filter(h=>!pools.has(h.owner)&&!['AMM','LOCKER'].includes(ka[h.owner]?.type));
+    const top10=hs.slice(0,10).reduce((a,h)=>a+(h.pct||0),0),max=hs[0]?.pct||0,n=rc.totalHolders||0;
+    let s=(n<100?0:n<500?1:n<1000?2:n<3000?3:4)+(top10<20?4:top10<30?3:top10<40?2:top10<50?1:0)+(max<5?2:max<10?1:0);
+    add('3. Holders',s,[(n>=1000?'🟢':'🟡')+' Holders: '+n.toLocaleString('en'),(top10<30?'🟢':top10<50?'🟡':'🔴')+' Top 10 (excluding pools): '+pct(top10),(max<5?'🟢':max<10?'🟡':'🔴')+' Biggest holder: '+pct(max)+(hs[0]?' ('+short(hs[0].owner)+')':'')]);
+    top10>=50&&red.push('Top 10 hold '+pct(top10));n>=1000&&green.push(n.toLocaleString('en')+' holders');}else add('3. Holders',null,['⚪ RugCheck unavailable']);
+  // 4 linked wallets
+  if(rc){const sup=rc.token?.supply||0;const nets=rc.insiderNetworks||[];
+    const held=sup?nets.reduce((a,x)=>a+(x.currentHolding||0),0)/sup*100:0;const flagged=(rc.topHolders||[]).filter(h=>h.insider).length;
+    let s=held<2?10:held<5?8:held<10?6:held<20?3:0;s-=flagged;
+    add('4. Linked wallets',s,[(held<5?'🟢':held<10?'🟡':'🔴')+' Insider networks hold '+pct(held)+' of supply',`ℹ️ ${rc.graphInsidersDetected||0} insider wallet(s) in ${nets.length} network(s)`,(flagged?'🔴 ':'🟢 ')+flagged+' top holder(s) flagged as insider']);
+    held>=10&&red.push('Insiders hold '+pct(held));}else add('4. Linked wallets',null,['⚪ RugCheck unavailable']);
+  // 5 dev
+  if(rc){const sup=rc.token?.supply||0,cb=rc.creatorBalance||0,p=sup?cb/sup*100:0;const it=[];let s=p>10?2:p>5?5:7;
+    it.push((p>5?'🔴':'🟢')+' Creator holds '+pct(p)+(p===0?' (sold everything, cannot dump)':''));
+    if(rc.rugged){s=0;red.push('Marked as RUGGED');it.push('🔴 RugCheck marks this token as rugged');}
+    if(rc.creator)it.push('🔎 Check the dev\'s past coins: <a href="https://pump.fun/profile/'+esc(rc.creator)+'" target="_blank" rel="noopener">Pump.fun profile</a> · <a href="https://solscan.io/account/'+esc(rc.creator)+'" target="_blank" rel="noopener">Solscan</a>');
+    p>5&&red.push('Dev holds '+pct(p));add('5. Dev',s,it);}else add('5. Dev',null,['⚪ RugCheck unavailable']);
+  // 6 trading
+  if(pair){const v=pair.volume?.h24||0,b=pair.txns?.h24?.buys||0,se=pair.txns?.h24?.sells||0,ch=pair.priceChange?.h24||0,r=b+se?b/(b+se):0;const bots=botSignals(trades);
+    let s=(v<1e3?0:v<1e4?1:v<5e4?2:v<2.5e5?3:4)+(r>=.5?2:r>=.4?1:0)+(ch>-10?2:ch>-30?1:0)+(trades?(bots.length===0?2:bots.length<=2?1:0):1);
+    const it=[(v<1e4?'🔴':'🟢')+' Volume 24h: '+usd(v),(r>=.5?'🟢':'🟡')+` Trades 24h: ${b} buys / ${se} sells`,(ch>-10?'🟢':ch>-30?'🟡':'🔴')+' Price 24h: '+(ch>0?'+':'')+ch+'%'];
+    trades?(bots.length?bots.forEach(x=>it.push('🟡 Bot pattern: '+x)):it.push('🟢 No obvious bot pattern in recent trades')):it.push('⚪ Recent trades unavailable');
+    v<1e3&&red.push('Almost no volume');bots.length>2&&red.push('Bot activity');add('6. Trading',s,it);}else add('6. Trading',null,['⚪ No DexScreener pair found']);
+  // 7 social
+  {const info=pair?.info||{},soc=info.socials||[],has=t=>soc.some(x=>x.type===t);const o=orders?.orders||[];
+    const cto=o.some(x=>x.type==='communityTakeover'&&x.status==='approved'),prof=o.some(x=>x.type==='tokenProfile'&&x.status==='approved');
+    const web=(info.websites||[]).length>0;let s=(web?2:0)+(has('twitter')?2:0)+(has('telegram')?2:0)+(prof?2:0)+(cto?2:0);
+    const it=[(web?'🟢':'🔴')+' Website',(has('twitter')?'🟢':'🔴')+' X account',(has('telegram')?'🟢':'🟡')+' Telegram',(prof?'🟢':'🟡')+' DexScreener profile',(cto?'🟢 Community takeover (CTO) approved':'⚪ No CTO')];
+    (info.websites||[]).concat(soc).forEach(x=>{if(/^https:\/\//.test(x.url||''))it.push('🔗 <a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.label||x.type||x.url)+'</a>')});
+    cto&&green.push('CTO approved');add('7. Social',pair||orders?s:null,it);}
+  const W=[.25,.2,.15,.1,.1,.1,.1];let tot=0,w=0;S.forEach((x,i)=>{if(x.score!=null){tot+=x.score*W[i];w+=W[i]}});
+  let score=w?tot/w:null;
+  if(score!=null){if(red.some(r=>/Mint|Freeze/.test(r)))score=Math.min(score,3);if(lock!=null&&lock<50)score=Math.min(score,4);if(liq!=null&&liq<1e4)score=Math.min(score,6);if(rc?.rugged)score=1;score=Math.round(score*10)/10;}
+  return {S,score,red,green};
+}
+
+function render(ca,rc,pair,res){
+  const sym=pair?.baseToken?.symbol||rc?.tokenMeta?.symbol||'?',name=pair?.baseToken?.name||rc?.tokenMeta?.name||'';
+  const sc=res.score,col=sc==null?'var(--mute)':sc>=7?'var(--green)':sc>=4?'var(--amber)':'var(--red)';
+  const label=sc==null?'Not enough data':sc>=7?'Lower risk':sc>=4?'Medium risk':'High risk';
+  const C=2*Math.PI*78,off=C*(1-(sc||0)/10);
+  const rows=res.S.map(x=>{const c=x.score==null?'var(--line)':x.score>=7?'var(--green)':x.score>=4?'var(--amber)':'var(--red)';
+    return `<details class="sec" open><summary><span>${x.name}</span><span class="num">${x.score==null?'n/a':x.score+'/10'}</span></summary><div class="bar"><i style="width:${(x.score||0)*10}%;background:${c}"></i></div><ul>${x.items.map(i=>'<li>'+i+'</li>').join('')}</ul></details>`}).join('');
+  $('#out').innerHTML=`<div class="verdict"><div class="dial"><svg viewBox="0 0 180 180"><circle cx="90" cy="90" r="78" fill="none" stroke="#0c0e0a" stroke-width="14"/><circle class="v" cx="90" cy="90" r="78" fill="none" stroke="${col}" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}"/></svg><div class="num">${sc==null?'?':sc}<small>/10</small></div></div>
+  <div><p class="token">$${esc(sym)} <span class="mute" style="font-weight:400;font-size:16px">${esc(name)}</span></p><code>${esc(ca)}</code><br><span class="tag" style="background:${col};color:#11140F">${label}</span>
+  <div class="flags">${res.green.map(g=>'<span>🟢 '+esc(g)+'</span>').join('')}${res.red.map(r=>'<span>🔴 '+esc(r)+'</span>').join('')}</div>
+  <p class="mute" style="font-size:14px;margin:8px 0 0">Price ${pair?'$'+esc(pair.priceUsd):'n/a'} · MC ${usd(pair?.marketCap??pair?.fdv)} · Scanned ${new Date().toUTCString().slice(5,22)} UTC</p></div></div>
+  ${rows}
+  <div class="share"><button id="cpL">Copy scan link</button><button class="ghost" id="cpT">Copy summary for X</button><a class="ghost" style="display:inline-flex;align-items:center;padding:0 16px;border:1px solid var(--line);border-radius:10px;min-height:48px;text-decoration:none" href="https://rugcheck.xyz/tokens/${esc(ca)}" target="_blank" rel="noopener">Open on RugCheck</a></div>`;
+  requestAnimationFrame(()=>{const v=document.querySelector('circle.v');if(v)v.style.strokeDashoffset=off});
+  const link=location.origin+location.pathname+'?ca='+encodeURIComponent(ca);
+  const txt=`🛡️ Trader Scan: $${sym} scored ${sc??'?'}/10 (${label})\n${res.green.slice(0,3).map(g=>'🟢 '+g).join('\n')}\n${res.red.slice(0,3).map(r=>'🔴 '+r).join('\n')}\n\nScan any Solana coin for free 👇\n${link}\n\nBy the Trader in a world of KOLs\nDYOR · NFA`.replace(/\n{3,}/g,'\n\n');
+  const copy=(t,b)=>navigator.clipboard.writeText(t).then(()=>{const o=b.textContent;b.textContent='Copied ✓';setTimeout(()=>b.textContent=o,1500)}).catch(()=>{$('#st').textContent='Copy blocked: select and copy manually → '+t});
+  $('#cpL').onclick=e=>copy(link,e.target);$('#cpT').onclick=e=>copy(txt,e.target);
+}
+
+async function scan(ca){
+  ca=ca.trim();if(!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(ca)){$('#st').textContent='This does not look like a Solana address.';return;}
+  $('#go').disabled=true;$('#out').innerHTML='';$('#st').textContent='Scanning… reading RugCheck, DexScreener and GeckoTerminal';
+  try{history.replaceState(null,'','?ca='+encodeURIComponent(ca))}catch(e){}
+  const [rc,ds,orders]=await Promise.all([get('https://api.rugcheck.xyz/v1/tokens/'+ca+'/report').catch(()=>null),get('https://api.dexscreener.com/latest/dex/tokens/'+ca).catch(()=>null),get('https://api.dexscreener.com/orders/v1/solana/'+ca).catch(()=>null)]);
+  const pair=(ds?.pairs||[]).filter(p=>p.chainId==='solana').sort((a,b)=>(b.liquidity?.usd||0)-(a.liquidity?.usd||0))[0]||null;
+  let trades=null;if(pair)trades=await get('https://api.geckoterminal.com/api/v2/networks/solana/pools/'+pair.pairAddress+'/trades').then(j=>j.data).catch(()=>null);
+  $('#go').disabled=false;
+  if(!rc&&!pair){$('#st').textContent='No data found for this address (or the sources are down). Try again in a minute.';return;}
+  const miss=[!rc&&'RugCheck',!pair&&'DexScreener',pair&&!trades&&'GeckoTerminal'].filter(Boolean);
+  $('#st').textContent=miss.length?'Some sources did not answer: '+miss.join(', ')+'. Score uses what is available.':'';
+  render(ca,rc,pair,analyze(rc,pair,orders,trades));
+}
+$('#f').addEventListener('submit',e=>{e.preventDefault();scan($('#ca').value)});
+const q=new URLSearchParams(location.search).get('ca');if(q){$('#ca').value=q;scan(q);}
+window.__analyze=analyze;
+}
+</script>
+</body>
+</html>
